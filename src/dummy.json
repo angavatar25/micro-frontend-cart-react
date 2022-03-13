@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "product_name": "Toyota Supra",
+        "price": 45000,
+        "summary": "A great car"
+    },
+    {
+        "id": 2,
+        "product_name": "Honda CRV",
+        "price": 20000,
+        "summary": "A great car"
+    },
+    {
+        "id": 3,
+        "product_name": "Renault Clio V6",
+        "price": 35000,
+        "summary": "A great car"
+    },
+    {
+        "id": 4,
+        "product_name": "Ford Focus RS",
+        "price": 55000,
+        "summary": "A great car"
+    },
+    {
+        "id": 5,
+        "product_name": "BMW 320i",
+        "price": 65000,
+        "summary": "A great car"
+    }
+]
