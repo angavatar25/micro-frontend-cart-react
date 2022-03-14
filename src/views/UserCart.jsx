@@ -17,18 +17,19 @@ export default function UserCart() {
                     </div>
                 </div>
             </div>
-            <div className=" text-right flex-grow my-auto">
-                1x
-            </div>
         </div>
     ))
     useEffect(() => {
         window.addEventListener("message", (event)=>{
             const itemData = event.data
-            cart.push(itemData)
-            setcart([...cart])
+            if(cart.some(e => e.item === itemData.item)) {
+                alert('Item already exist')
+            } else {
+                cart.push(itemData)
+                setcart([...cart])
+            }
         });
-    },[cart])
+    },[])
   return (
     <div>
         <div className=" w-96 p-3 m-auto min-h-screen bg-white border-t-2 border-yellow-400">
