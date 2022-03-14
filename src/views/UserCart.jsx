@@ -3,17 +3,17 @@ import { useEffect, useState } from 'react'
 
 export default function UserCart() {
     const [cart, setcart] = useState([])
-    const rupiahChecker = (x) => {
-        return 'Rp. ' + x.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
-    }
-    const cartComponent = (product) => product.map((index) => (
-        <div className="flex mb-6" key={index.id}>
+    // const rupiahChecker = (x) => {
+    //     return 'Rp. ' + x.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
+    // }
+    const cartComponent = (product) => product.map((index, i) => (
+        <div className="flex mb-6" key={i}>
             <div className=" flex">
                 <div className=" w-16 h-16 bg-gray-500"></div>
                 <div className=" my-auto ml-4">
                     <div>
                         <p>{index.item}</p>
-                        <p>{rupiahChecker(index.price) }</p>
+                        <p>{index.price}</p>
                     </div>
                 </div>
             </div>
@@ -26,6 +26,7 @@ export default function UserCart() {
         window.addEventListener("message", (event)=>{
             const itemData = event.data
             cart.push(itemData)
+            setcart([...cart])
         });
     },[cart])
   return (
