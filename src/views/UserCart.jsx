@@ -8,20 +8,22 @@ export default function UserCart() {
     const [quantity, setquantity] = useState(0)
     const TestComponent = (product) => product.map((product, i) => (
         <div className="flex mb-6" key={i}>
-            <div className=" flex">
-                <div className=" w-16 h-16 bg-gray-500"></div>
-                <div className=" my-auto ml-4 flex justify-between">
+            <div className=" flex w-full">
+                <div className=" w-16 h-16 bg-gray-500 my-auto"></div>
+                <div className="my-auto ml-4">
                     <div>
                         <p>{product.eventData.item}</p>
                         <p>{rupiahChecker(product.eventData.price)}</p>
                     </div>
-                    <div>
-                        <button onClick={() => decreaseAmount(product.eventData.item)}>-</button>
-                        <p>{product.eventData.quantity}</p>
-                        <button onClick={() => increaseAmount(product.eventData.item)}>+</button>
+                </div>
+                <div className='text-right flex-grow my-auto'>
+                    <div className='inline-flex gap-4'>
+                        <button className=' bg-red-500 text-white p-1' onClick={() => decreaseAmount(product.eventData.item)}>-</button>
+                        <p className=' my-auto'>{product.eventData.quantity}</p>
+                        <button className=' bg-green-500 text-white p-1' onClick={() => increaseAmount(product.eventData.item)}>+</button>
                     </div>
                     <div>
-                        <button onClick={() => deleteItem(product.eventData.item)}>Delete</button>
+                        <button className=' bg-red-500 p-2 text-white mt-3' onClick={() => deleteItem(product.eventData.item)}>Delete</button>
                     </div>
                 </div>
             </div>
@@ -52,6 +54,10 @@ export default function UserCart() {
         let decreaseQuantity = cart.find(item => item.eventData.item === name)
         if(cart.some(e => e.eventData.item === name)) {
             setquantity(decreaseQuantity.eventData.quantity --)
+            if(decreaseQuantity.eventData.quantity === 0) {
+                cart.splice(cart.indexOf(name), 1)
+                setcart([...cart])
+            }
         }
         return decreaseQuantity.eventData.quantity
     }
