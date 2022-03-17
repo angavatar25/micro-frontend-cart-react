@@ -49,9 +49,9 @@ export default function UserCart() {
                         <p>{product.eventData.quantity}</p>
                         <button onClick={() => increaseAmount(product.eventData.item)}>+</button>
                     </div>
-                    {/* <div>
-                        <button onClick={removeItem}>Delete</button>
-                    </div> */}
+                    <div>
+                        <button onClick={() => deleteItem(product.eventData.item)}>Delete</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,11 +77,6 @@ export default function UserCart() {
             setquantity(increaseQuantity.eventData.quantity ++)
         }
         return increaseQuantity.eventData.quantity
-        // for(var i in cart) {
-        //     if(cart[i].eventData.item === name) {
-        //         cart[i].eventData.quantity ++
-        //     }
-        // }
     }
     const decreaseAmount = (name) => {
         let decreaseQuantity = cart.find(item => item.eventData.item === name)
@@ -91,17 +86,14 @@ export default function UserCart() {
         return decreaseQuantity.eventData.quantity
     }
     const deleteItem = (name) => {
-        for(var i in cart) {
-            if(cart[i].eventData.item === name) {
-                cart.splice(i, 1)
-            }
-        }
-        return cart
+        setcart(cart => cart.filter(index => index.eventData.item !== name))
+        cart.splice(cart.indexOf(name), 1)
+        setcart([...cart])
     }
     useEffect(() => {
         window.addEventListener("message", handleMessage);
         return () => window.removeEventListener("message", handleMessage);
-    },[])
+    },[cart])
   return (
     <div>
         <div className=" w-96 p-3 m-auto min-h-screen bg-white border-t-2 border-yellow-400">
